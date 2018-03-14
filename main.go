@@ -7,6 +7,13 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
+type (
+	health struct {
+		ServiceName string `json:"serviceName"`
+		Alive       bool   `json:"alive"`
+	}
+)
+
 func main() {
 	// Echo instance
 	e := echo.New()
@@ -16,10 +23,11 @@ func main() {
 	e.Use(middleware.Recover())
 
 	// Route => handler
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World from svc-tils!\n")
+	e.GET("/health", func(c echo.Context) error {
+		u := health{Alive: true, ServiceName: "svc-tils"}
+		return c.JSON(http.StatusOK, u)
 	})
 
 	// Start server
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(":8080"))
 }
