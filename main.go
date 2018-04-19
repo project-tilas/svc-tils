@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -13,6 +15,18 @@ type (
 		Alive       bool   `json:"alive"`
 	}
 )
+
+var version string
+var port string
+
+func init() {
+	fmt.Println("Running SVC_TILS version: " + version)
+	port = os.Getenv("SVC_TILS_PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+}
 
 func main() {
 	// Echo instance
@@ -29,5 +43,5 @@ func main() {
 	})
 
 	// Start server
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start(":" + port))
 }
