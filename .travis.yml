@@ -24,7 +24,6 @@ install:
   - gcloud --quiet components update
   - gcloud --quiet components update kubectl
   - kubectl config view
-  - kubectl config current-context
 
 script:
   - make ship
