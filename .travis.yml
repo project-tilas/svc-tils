@@ -27,6 +27,7 @@ install:
   - gcloud --quiet components update
   - gcloud --quiet components update kubectl
   - kubectl config view
+  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
   - make install
 
 script:

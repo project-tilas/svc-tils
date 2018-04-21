@@ -5,7 +5,7 @@ TAG?=$(shell git rev-list HEAD --max-count=1 --abbrev-commit)
 export TAG
 
 install:
-	go dep ensure -vendor-only
+	dep ensure -vendor-only
 
 test:
 	go test ./...
