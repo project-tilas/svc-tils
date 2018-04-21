@@ -1,6 +1,9 @@
 language: go
 sudo: required
 
+go:
+  - "1.10.1"
+
 services:
   - docker
 
@@ -24,6 +27,7 @@ install:
   - gcloud --quiet components update
   - gcloud --quiet components update kubectl
   - kubectl config view
+  - make install
 
 script:
   - make ship
