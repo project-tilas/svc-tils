@@ -18,13 +18,13 @@ type (
 )
 
 var version string
-var port string
+var addr string
 
 func init() {
 	fmt.Println("Running SVC_TILS version: " + version)
-	port = os.Getenv("SVC_TILS_PORT")
-	if port == "" {
-		port = "8080"
+	addr = os.Getenv("SVC_TILS_ADDR")
+	if addr == "" {
+		addr = ":8080"
 	}
 
 }
@@ -44,5 +44,5 @@ func main() {
 	})
 
 	// Start server
-	e.Logger.Fatal(e.Start(":" + port))
+	e.Logger.Fatal(e.Start(addr))
 }

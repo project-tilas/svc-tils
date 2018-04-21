@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: svc-tils
@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: svc-tils
-        image: gcr.io/project-tilas/news-service:${TAG}
+        image: gcr.io/project-tilas/svc-tils:${TAG}
         command:
         ports:
           - containerPort: 8080
@@ -23,5 +23,4 @@ spec:
             readOnly: true
       volumes:
         - name: svc-tils-config
-          configMap: 
-            name: svc-tils-config
+          configMap: { name: svc-tils-config }
