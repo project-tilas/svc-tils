@@ -13,21 +13,19 @@ test:
 build: install
 	go build -ldflags "-X main.version=$(TAG)" -o svc-tils .
 
-serve: build
-	./svc-tils
 
 clean:
 	rm ./svc-tils
 
 pack:
 	GOOS=linux make build
-	docker build -t github.com/project-tilas/svc-tils:$(TAG) .
+	docker build -t gcr.io/project-tilas/svc-tils:$(TAG) .
 
-serve-container:
-	docker run -d -it -p 8080:8080 --name=svc-tils github.com/project-tilas/svc-tils:$(TAG)
+serve: pack
+	docker run -d -it -p 8080:8080 --name=svc-tils gcr.io/project-tilas/svc-tils:$(TAG)
 
 upload:
-	gcloud docker -- push github.com/project-tilas/svc-tils:$(TAG)
+	docker push gcr.io/project-tilas/svc-tils:$(TAG)
 
 deploy:
 	envsubst < k8s/deployment.yml | kubectl apply -f -

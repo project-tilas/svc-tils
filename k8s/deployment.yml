@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: svc-tils
+  labels: 
+    app: svc-tils
+spec:
+  replicas: 1
+  template:
+    metadata: 
+      labels: 
+        app: svc-tils
+    spec:
+      containers:
+      - name: svc-tils
+        image: gcr.io/project-tilas/news-service:${TAG}
+        command:
+        ports:
+          - containerPort: 8080
+        volumeMounts:
+          - name: svc-tils-config
+            mountPath: /etc/svc-tils/
+            readOnly: true
+      volumes:
+        - name: svc-tils-config
+          configMap: 
+            name: svc-tils-config

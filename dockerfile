@@ -1,4 +1,4 @@
-FROM golang:1.10.1 AS builder
+FROM alpine:3.7
 
 EXPOSE 8080
 
