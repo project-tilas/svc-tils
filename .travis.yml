@@ -27,4 +27,4 @@ install:
   - kubectl config current-context
 
 script:
-  - make deploy
+  - make ship
