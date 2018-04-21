@@ -26,6 +26,8 @@ install:
   - gcloud auth activate-service-account --key-file $HOME/gcloud-service-key.json
   - gcloud --quiet components update
   - gcloud --quiet components update kubectl
+  - gcloud --quiet components update docker-credential-gcr
+  - docker-credential-gcr configure-docker
   - kubectl config view
   - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
   - make install
