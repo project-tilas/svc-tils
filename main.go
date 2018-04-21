@@ -13,6 +13,7 @@ type (
 	health struct {
 		ServiceName string `json:"serviceName"`
 		Alive       bool   `json:"alive"`
+		Version     string `json:"version"`
 	}
 )
 
@@ -38,7 +39,7 @@ func main() {
 
 	// Route => handler
 	e.GET("/health", func(c echo.Context) error {
-		u := health{Alive: true, ServiceName: "svc-tils"}
+		u := health{Alive: true, ServiceName: "svc-tils", Version: version}
 		return c.JSON(http.StatusOK, u)
 	})
 
