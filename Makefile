@@ -18,7 +18,7 @@ clean:
 	rm ./svc-tils
 
 pack:
-	GOOS=linux make build
+	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 make build
 	docker build -t gcr.io/project-tilas/svc-tils:$(TAG) .
 
 serve: pack
