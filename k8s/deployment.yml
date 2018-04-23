@@ -23,4 +23,16 @@ spec:
             readOnly: true
       volumes:
         - name: svc-tils-config
-          configMap: { name: svc-tils-config }
+          configMap: { name: svc-tils-config } 
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: svc-tils
+spec:
+  selector:
+    app: svc-tils
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
